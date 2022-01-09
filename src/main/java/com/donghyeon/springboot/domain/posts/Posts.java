@@ -1,5 +1,6 @@
 package com.donghyeon.springboot.domain.posts;
 
+import com.donghyeon.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
  * Post 클래스는 DB의 테이블과 매칭 됨 (Entity 클래스라고 함)
  * JPA를 사용하면 쿼리를 날리는게 아니라 이 클래스를 수정하여 작업
  */
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id //PK 필드임을 나타냄 (id 변수가 PRIMARY KEY)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //GenerationType.IDENTITY를 추가해야 autoincrement(자동으로 값 증가)가 됨
     private Long id;
