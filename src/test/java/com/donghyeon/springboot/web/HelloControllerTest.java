@@ -1,14 +1,18 @@
-package com.donghyeon.springboot;
+package com.donghyeon.springboot.web;
 
-import com.donghyeon.springboot.web.HelloController;
+import org.apache.catalina.security.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -16,12 +20,14 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class) //SpringBoot 테스트와 JUnit(자바 테스트 도구) 사이의 연결자 역할
 @WebMvcTest(controllers = HelloController.class) //Web에 집중할 수 있는 어노테이션(controllers에 HelloController 클래스를 연결)
+@MockBean(JpaMetamodelMappingContext.class) //JpaAuditing으로 인해 Jpa Bean이 필요
+
 public class HelloControllerTest {
     @Autowired //스프링이 관리하는 빈(Bean)을 주입 받음
     private MockMvc mvc; //웹 API 테스트할 때 사용, MVC 테스트의 시작점, API 테스트 가능
 
     @Test
-    public void hello가_리턴된다() throws Exception{
+    public void returnHello() throws Exception{
         String hello = "hello";
             
         //MockMvc를 통해 /hello 주소로 HTTP GET 요청
@@ -33,7 +39,7 @@ public class HelloControllerTest {
     }
 
     @Test
-    public void helloDto가_리턴된다() throws Exception{
+    public void returnHelloDto() throws Exception{
         String name = "hello";
         int amount = 1000;
 
