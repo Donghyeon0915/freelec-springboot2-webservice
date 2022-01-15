@@ -1,5 +1,6 @@
 package com.donghyeon.springboot.web;
 
+import com.donghyeon.springboot.config.auth.LoginUser;
 import com.donghyeon.springboot.config.auth.dto.SessionUser;
 import com.donghyeon.springboot.service.posts.PostsService;
 import com.donghyeon.springboot.web.dto.PostsResponseDto;
@@ -19,12 +20,12 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         //<Key, Value> 타입으로 index.mustache로 전달 됨
         //Value에 findAllDesc() 메소드에 의해 List 타입이 들어가고 index.mustache에선 {{#posts}}로 매핑되어 for문으로 순회됨
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //httpSession에 <"name", new SessionUser(user)> 타입으로 저장되어있음
 
+        //httpSession에 <"name", new SessionUser(user)> 타입으로 저장되어있음
         if(user != null) model.addAttribute("userName", user.getName());
         return "index";
     }
