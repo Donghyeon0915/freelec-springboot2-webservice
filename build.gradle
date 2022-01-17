@@ -29,8 +29,16 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    /* gradle test 오류 날 때 이전 버전의 commons를 제거하고 최신 버전으로 업데이트 
+    *  버전이 junit과 맞지 않아서 생기는 오류인 듯함
+    * */
+    testImplementation ('org.junit.jupiter:junit-jupiter-api:5.8.1'){
+        exclude module:'junit-platform-commons'
+    }
+    testRuntimeOnly ('org.junit.jupiter:junit-jupiter-engine:5.8.1')
+    testRuntimeOnly('org.junit.platform:junit-platform-engine:1.5.1')
+    testRuntimeOnly('org.junit.platform:junit-platform-commons:1.5.1')
+
     implementation('org.springframework.boot:spring-boot-starter-web')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
