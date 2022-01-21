@@ -27,13 +27,13 @@ public class Posts extends BaseTimeEntity {
     private String author;
 
     @Builder //빌더 패턴 클래스를 생성. 생성자 상단에 선언하면 생성자에 포함된 필드만 포함함
-    public Posts(String title, String content, String author){
+    public Posts(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
     }
 
-    public void update(String title, String content){
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
     }

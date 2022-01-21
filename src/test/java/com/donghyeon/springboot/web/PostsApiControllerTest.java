@@ -42,13 +42,13 @@ public class PostsApiControllerTest {
     private int port;
 
     @Autowired
-    private TestRestTemplate  restTemplate;
+    private TestRestTemplate restTemplate;
 
     @Autowired
     private PostsRepository postsRepository;
 
     @After
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         postsRepository.deleteAll();
     }
 
@@ -58,15 +58,16 @@ public class PostsApiControllerTest {
     private MockMvc mvc;
 
     @Before
-    public void setup(){
+    public void setup() {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
     }
+
     @Test
-    @WithMockUser(roles="USER")
-    public void addPosts() throws Exception{
+    @WithMockUser(roles = "USER")
+    public void addPosts() throws Exception {
         //given
         String title = "title";
         String content = "content";
@@ -81,8 +82,8 @@ public class PostsApiControllerTest {
         //when
         //ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
         mvc.perform(post(url)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
 
 
@@ -97,8 +98,8 @@ public class PostsApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles="USER")
-    public void modifyPosts() throws Exception{
+    @WithMockUser(roles = "USER")
+    public void modifyPosts() throws Exception {
         //given
         //db에 저장 후 리턴
         Posts savedPosts = postsRepository.save(Posts.builder()
@@ -106,11 +107,11 @@ public class PostsApiControllerTest {
                 .content("content")
                 .author("author")
                 .build());
-        
+
         Long updateId = savedPosts.getId();
         String expectedTitle = "title2";
         String expectedContent = "content2";
-        
+
         //Dto에 수정 할 정보를 저장
         PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
                 .title(expectedTitle)
@@ -123,8 +124,8 @@ public class PostsApiControllerTest {
         //when
         //ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
         mvc.perform(put(url)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
 
         //then

@@ -17,7 +17,7 @@ public class IndexControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void loadMainpage(){
+    public void loadMainpage() {
         //when
         String body = this.restTemplate.getForObject("/", String.class);
 

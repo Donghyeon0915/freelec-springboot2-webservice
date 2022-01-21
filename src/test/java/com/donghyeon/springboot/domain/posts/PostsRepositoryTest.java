@@ -21,13 +21,13 @@ public class PostsRepositoryTest {
     PostsRepository postsRepository; //JpaRepository<Entity 클래스, PK 타입>을 상속했으므로 CRUD 메소드가 자동 생성되어있음
 
     @After //단위 테스트가 끝날 때마다 실행되는 메소드로 지정
-    public void cleanup(){
+    public void cleanup() {
         //테스트가 끝나면 db 테이블을 초기화
         postsRepository.deleteAll();
     }
 
     @Test
-    public void savePosts(){
+    public void savePosts() {
         //given
         String title = "테스트 게시글";
         String content = "테스트 본문";
@@ -49,9 +49,9 @@ public class PostsRepositoryTest {
     }
 
     @Test
-    public void addBaseTimeEntity(){
+    public void addBaseTimeEntity() {
         //given
-        LocalDateTime now = LocalDateTime.of(2021,1,9,0,0,0);
+        LocalDateTime now = LocalDateTime.of(2021, 1, 9, 0, 0, 0);
         postsRepository.save(Posts.builder()
                 .title("title")
                 .content("content")

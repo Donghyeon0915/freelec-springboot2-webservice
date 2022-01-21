@@ -18,7 +18,7 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
     private final HttpSession httpSession;
 
     @Override
-    public boolean supportsParameter(MethodParameter parameter){
+    public boolean supportsParameter(MethodParameter parameter) {
         //파라미터에 @LoginUser 어노테이션이 있는지 체크
         boolean isLoginUserAnnotation = parameter.getParameterAnnotation(LoginUser.class) != null;
         //파라미터로 넘어온 @LoginUser 어노테이션이 붙은 클래스가 SessionUser 클래스인지를 체크
@@ -30,8 +30,8 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception{
-        
+                                  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+
         return httpSession.getAttribute("user");
     }
 

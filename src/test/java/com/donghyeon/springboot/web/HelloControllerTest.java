@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class) //SpringBoot 테스트와 JUnit(자바 테스트 도구) 사이의 연결자 역할
 @WebMvcTest(controllers = HelloController.class, //Web에 집중할 수 있는 어노테이션(controllers에 HelloController 클래스를 연결)
-        excludeFilters ={
+        excludeFilters = {
                 @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
         }
 )
@@ -31,28 +31,28 @@ public class HelloControllerTest {
 
     @WithMockUser(roles = "USER")
     @Test
-    public void returnHello() throws Exception{
+    public void returnHello() throws Exception {
         String hello = "hello";
-            
+
         //MockMvc를 통해 /hello 주소로 HTTP GET 요청
         //체이닝이 지원되어 여러 검증 기능을 이어서 선언
         mvc.perform(get("/hello"))
                 .andExpect(status().isOk())  //상태를 검증(200, 404, 500 등)
                 .andExpect(content().string(hello)); //응답 본문의 내용을 검증, controllers에서 "hello"를 리턴하기 떄문에 이 값이 맞는지 검증   
-                                                     //테스트하려는 클래스(HelloController)의 메소드에서 hello를 리턴함. 실제로 웹페이지를 열어보면 hello가 출력됨
+        //테스트하려는 클래스(HelloController)의 메소드에서 hello를 리턴함. 실제로 웹페이지를 열어보면 hello가 출력됨
     }
 
     @WithMockUser(roles = "USER")
     @Test
-    public void returnHelloDto() throws Exception{
+    public void returnHelloDto() throws Exception {
         String name = "hello";
         int amount = 1000;
 
         mvc.perform(
-                get("/hello/Dto")
-                        .param("name", name)
-                        .param("amount", String.valueOf(amount))
-        ).andExpect(status().isOk())
+                        get("/hello/Dto")
+                                .param("name", name)
+                                .param("amount", String.valueOf(amount))
+                ).andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(name)))
                 .andExpect(jsonPath("$.amount", is(amount)));
     }

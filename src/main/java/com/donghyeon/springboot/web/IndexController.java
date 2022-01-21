@@ -20,23 +20,23 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){
+    public String index(Model model, @LoginUser SessionUser user) {
         //<Key, Value> 타입으로 index.mustache로 전달 됨
         //Value에 findAllDesc() 메소드에 의해 List 타입이 들어가고 index.mustache에선 {{#posts}}로 매핑되어 for문으로 순회됨
         model.addAttribute("posts", postsService.findAllDesc());
 
         //httpSession에 <"name", new SessionUser(user)> 타입으로 저장되어있음
-        if(user != null) model.addAttribute("userName", user.getName());
+        if (user != null) model.addAttribute("userName", user.getName());
         return "index";
     }
 
     @GetMapping("/posts/save")
-    public String postsSave(){
+    public String postsSave() {
         return "posts-save";
     }
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id, Model model){
+    public String postsUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id); //수정 할 포스트를 가져옴
         model.addAttribute("post", dto); //서버 템플릿 엔진(머스테치)에서 쓸 수 있도록 객체를 저장
 
