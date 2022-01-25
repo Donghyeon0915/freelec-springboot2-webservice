@@ -2,8 +2,8 @@
 /.gradle/
 .gradle
 .idea
-<<<<<<< HEAD
+#<<<<<<< HEAD
 # application-oauth.properties
-=======
-application-oauth.properties
->>>>>>> 1420860a7b8e3b04c2345576448e6ef26f1814c6
+#=======
+#application-oauth.properties
+#>>>>>>> 1420860a7b8e3b04c2345576448e6ef26f1814c6
