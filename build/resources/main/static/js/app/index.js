@@ -33,6 +33,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
+
     update: function () {
         var data = {
             title: $('#title').val(),
@@ -54,6 +55,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
+
     delete: function () {
         var id = $('#id').val();
 

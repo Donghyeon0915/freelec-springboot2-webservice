@@ -55,7 +55,11 @@ public class PostsService {
     @Transactional
     public void delete(Long id) {
         //삭제할 포스트를 가져옴(없으면 IllegalArgumentException 발생)
-        Posts posts = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id"));
+        Posts posts = postsRepository.findById(id).orElseThrow(()
+                -> new IllegalArgumentException("해당 게시글이 없습니다. id"));
+
         postsRepository.delete(posts);
     }
+
+
 }

@@ -42,4 +42,5 @@ public class IndexController {
 
         return "posts-update";  //posts-update.mustache로 전달
     }
+
 }
